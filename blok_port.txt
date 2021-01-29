@@ -1,3 +1,0 @@
-ip firewall raw add action=add-src-to-address-list address-list="IP PUBG Mobile" address-list-timeout=none-static chain=prerouting comment="PUBG Mobile" dst-port=10491,10010,10013,10612,20002,20001,20000,12235,13748,13972,13894,11455,10096,10039 protocol=udp src-address-list=Local
-ip firewall raw add action=add-src-to-address-list address-list="IP PUBG Mobile" address-list-timeout=none-static chain=prerouting comment="PUBG Mobile" dst-port=10012,17500 protocol=tcp src-address-list=Local
-ip firewall raw add action=drop chain=prerouting comment="PUBG Mobile" dst-address-list="IP PUBG Mobile"
