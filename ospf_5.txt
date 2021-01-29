@@ -1,0 +1,21 @@
+system identity set name=R-5
+
+interface bridge add name=loopback
+
+ip address add address=10.5.5.5/32 interface=loopback
+ip address add address=192.168.200.2/30 interface=ether1
+ip address add address=192.168.3.1/24 interface=ether2
+ip address add address=192.168.4.1/24 interface=ether3
+
+routing ospf interface add interface=ether1
+
+routing ospf instance set 0 router-id=10.5.5.5
+
+routing ospf area add name=area2 area-id=2.2.2.2
+
+routing ospf network add network=192.168.200.0/30 area=area2
+routing ospf network add network=192.168.3.0/24 area=area2
+routing ospf network add network=192.168.4.0/24 area=area2
+
+ip r add dst-address=0.0.0.0/0 gateway=192.168.200.1
+ip dns set servers=8.8.8.8,8.8.4.4 allow-remote-requests=yes

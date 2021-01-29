@@ -1,0 +1,20 @@
+system identity set name=R-2
+
+interface bridge add name=loopback
+
+ip address add address=10.2.2.2/32 interface=loopback
+ip address add address=172.20.0.2/30 interface=ether1
+ip address add address=192.168.100.1/30 interface=ether2
+
+routing ospf interface add interface=ether1
+routing ospf interface add interface=ether2
+
+routing ospf instance set 0 router-id=10.2.2.2
+
+routing ospf area add name=area1 area-id=1.1.1.1
+
+routing ospf network add network=172.20.0.0/30 area=backbone
+routing ospf network add network=192.168.100.0/30 area=area1
+
+ip route add dst-address=0.0.0.0/0 gateway=172.20.0.1
+ip dns set servers=8.8.8.8,8.8.4.4 allow-remote-requests=yes

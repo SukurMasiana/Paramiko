@@ -1,0 +1,21 @@
+system identity set name=R-4
+
+interface bridge add name=loopback
+
+ip address add address=10.4.4.4/32 interface=loopback
+ip address add address=192.168.100.2/30 interface=ether1
+ip address add address=192.168.1.1/24 interface=ether2
+ip address add address=192.168.2.1/24 interface=ether3
+
+routing ospf interface add interface=ether1
+
+routing ospf instance set 0 router-id=10.4.4.4
+
+routing ospf area add name=area1 area-id=1.1.1.1
+
+routing ospf network add network=192.168.100.0/30 area=area1
+routing ospf network add network=192.168.1.0/24 area=area1
+routing ospf network add network=192.168.2.0/24 area=area1
+
+ip r add dst-address=0.0.0.0/0 gateway=192.168.100.1
+ip dns set servers=8.8.8.8,8.8.4.4 allow-remote-requests=yes
