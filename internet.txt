@@ -1,9 +1,0 @@
-system identity set name=satu
-
-ip address add address=192.168.10.2/24 interface=ether1
-
-ip route add dst-address=0.0.0.0/0 gateway=192.168.10.1
-
-ip dns set allow-remote-requests=yes servers=8.8.8.8,8.8.4.4
-
-ip firewall nat add action=masquerade chain=srcnat out-interface=ether1
